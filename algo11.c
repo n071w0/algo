@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void upHeap(int array[],int n){
 	int tmp;
@@ -12,8 +14,8 @@ void upHeap(int array[],int n){
 
 void downHeap(int array[],int num,int n){
 	int tmp;
-	if((array[n]<array[2*n] || array[n]<array[2*n+1]) &&
-	 (2*n <= num)){
+	if((array[n]<array[2*n] && 2*n <= num) ||
+	 (array[n]<array[2*n+1] && 2*n+1 <=num)){
 		if(array[2*n]<array[2*n+1] && 2*n+1 <=num){
 			tmp=array[n];
 			array[n]=array[2*n+1];
@@ -31,7 +33,6 @@ void downHeap(int array[],int num,int n){
 
 void heapSort(int array[],int num){ //根の要素を削除
 	int tmp;
-	int i;
 	while(num>1){
 	tmp = array[1];
 	array[1] = array[num];
@@ -42,12 +43,31 @@ void heapSort(int array[],int num){ //根の要素を削除
 }
 
 void main(){
-	int a[11]={0,7,16,3,4,5,11,9};
-	int size=7;
+	int a[11]={0};
+	int size=10;
 	int i;
+	srand((unsigned int)time(0));
+	printf("Reverse\nBefore:");
+	for(i=1;i<11;i++){
+		a[i]=11-i;
+		printf("%d ",a[i]);
+	}
+	printf("\nAfter:");
 	for(i=size/2;i>0;i--)downHeap(a,size,i);
 	heapSort(a,size);
 	for(i=1;i<=size;i++){
 		printf("%d ",a[i]);
 	}
+	printf("\nRandom\nBefore:");
+	for(i=1;i<11;i++){
+		a[i]=rand()%20+1;
+		printf("%d ",a[i]);
+	}
+	printf("\nAfter:");
+	for(i=size/2;i>0;i--)downHeap(a,size,i);
+	heapSort(a,size);
+	for(i=1;i<=size;i++){
+		printf("%d ",a[i]);
+	}
+
 }

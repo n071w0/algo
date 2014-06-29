@@ -12,8 +12,8 @@ void upHeap(int array[],int n){
 
 void downHeap(int array[],int num,int n){
 	int tmp;
-	if((array[n]<array[2*n] || array[n]<array[2*n+1]) &&
-	 (2*n <= num)){
+	if((array[n]<array[2*n] && 2*n <= num) ||
+	 (array[n]<array[2*n+1] && 2*n+1 <=num)){
 		if(array[2*n]<array[2*n+1] && 2*n+1 <=num){
 			tmp=array[n];
 			array[n]=array[2*n+1];
